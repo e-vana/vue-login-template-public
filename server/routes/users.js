@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const User = require("../models/user");
 const resetAttempt = require("../models/resetAttempt");
-
 const tokenBlacklist = require("../models/tokenBlacklist");
 
 const jwt = require('jsonwebtoken');
@@ -55,8 +54,10 @@ router.post('/register', catchErrors(async (req, res) => {
     
       var addUser = await newUser.save();
       console.log(addUser);
-      // send a confirmation email
       var confirmEmail = await sendConfirmationEmail(req.body.email, addUser._id);
+      if(!confirmEmail){
+        throw { message: "There was a problem sending a confirmation email."}
+      }
       if(addUser){
         res.send(addUser)
       } else {
@@ -66,6 +67,8 @@ router.post('/register', catchErrors(async (req, res) => {
   }
 }))
 
+
+// @@ checks the confirmation status of an account
 router.get('/confirmed-email/:id', catchErrors(async(req, res)=>{ 
   const user = await User.findOne({ _id: req.params.id});
   if(!user){
@@ -78,6 +81,8 @@ router.get('/confirmed-email/:id', catchErrors(async(req, res)=>{
   }
 }))
 
+
+// @@ Confirms the email address associated with a user id, should be used as an admin tool to not subvert email confirmations
 router.get('/confirm-email/:id', catchErrors(async(req, res)=> {
   const user = await User.findOne({_id: req.params.id});
   console.log(user);
@@ -90,6 +95,8 @@ router.get('/confirm-email/:id', catchErrors(async(req, res)=> {
   }
 }))
 
+
+// @@ Undo email confirmation for a user by ID
 router.get('/unconfirm-email/:id', catchErrors(async(req, res)=> {
   const user = await User.findOne({_id: req.params.id});
   if(user.isConfirmed==true){
@@ -102,6 +109,8 @@ router.get('/unconfirm-email/:id', catchErrors(async(req, res)=> {
   }
 }))
 
+
+// @@ Resend a confirmation email
 router.post('/send-confirm-email-again/', catchErrors(async(req, res)=> {
   console.log(req.body);
   var confirmEmail = await sendConfirmationEmail(req.body.userEmail, req.body.userId);
@@ -120,7 +129,7 @@ router.post('/login', catchErrors(async(req, res) => {
     if(correctPassword){
 
       var secret = process.env.JWT_SECRET;
-      var token = await jwt.sign({username: user.username, email: user.email, isAdmin: user.isAdmin}, secret, { expiresIn: '24h' });
+      var token = await jwt.sign({username: user.username, email: user.email, isAdmin: user.isAdmin}, secret, { expiresIn: '2 days' });
       res.status(200).json({
          token: token,
          userId: user._id,
@@ -156,12 +165,6 @@ router.post('/signout', catchErrors(async(req, res) => {
 }))
 
 
-//$2b$10$VLIgNB4OEMrPMx0cmu/1XOh5dvdWHdrNu6rydOS573NVlIqF6mKTi
-
-
-
-
-
 
 // @@ Get all users if admin
 router.get('/all', isAdmin, catchErrors(async(req, res) => {
@@ -175,7 +178,8 @@ router.get('/all', isAdmin, catchErrors(async(req, res) => {
 }))
 
 
-
+// @@ Change a permission type of a user if admin
+// @@ This route is quick and dirty mainly for quick testing, should not be used for any real changes to these permissions
 router.post('/:id/change-permission/:permission-:value', isAdmin, catchErrors(async (req, res) => {
   //send json request for change
   var user = await User.findOne({ _id: req.params.id });
@@ -194,10 +198,9 @@ router.post('/:id/change-permission/:permission-:value', isAdmin, catchErrors(as
 
 
 // @@ Get a specific user
+// @@ Omits password and some database values
 router.get('/:id', catchErrors(async (req, res) => {
-  // var user = await User.findById(req.params.id).exclude("password", "V", "mealCredits");
   var user = await User.findOne({_id: req.params.id}).select("username _id email isAdmin isRegistered isSupport dateJoined isConfirmed")
-
   if(user){
     res.send(user);
   }else {
@@ -205,16 +208,5 @@ router.get('/:id', catchErrors(async (req, res) => {
   }
 
 }));
-
-// @@ Get a specific user by ID to determine credits
-// router.get('/user/:username', catchErrors(async (req, res) => {
-//   var user = await User.find({ username: req.params.username});
-//   if(user){
-//     console.log(user[0].mealCredits);
-//     res.send(`User has ${user[0].mealCredits} meal credits remaining`);
-//   } else {
-//     throw `User with ${req.params.username} was not found.`
-//   }
-// }))
 
 module.exports = router;

@@ -1,6 +1,7 @@
+// @@ Checks the validity of a token, to be used as middleware on some certain routes
+
 const jwt = require('jsonwebtoken');
 const tokenBlacklist = require('../models/tokenBlacklist')
-
 
 const checkToken = async function(req, res, next){
   try {

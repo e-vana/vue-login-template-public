@@ -1,10 +1,7 @@
+// @@ Checks if the token attached to a request is an Admin token, used as middleware on admin protected routes
 const jwt = require('jsonwebtoken');
-
-
 const isAdmin = async function(req, res, next){
   try {
-
-    //This token will be on a request header, hardcoded for test right now
     var tokenBearer = req.headers.authorization;
     var split = tokenBearer.split(' ');
     var token = split[1];

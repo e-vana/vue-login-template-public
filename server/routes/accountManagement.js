@@ -82,8 +82,6 @@ router.post('/change-email', catchErrors(async(req, res) => {
 router.post('/reset-password-request', catchErrors(async(req, res) => {
   //some logic to check existing reset attempts
   const findReset = await resetAttempt.find({userEmail: req.body.email});
-  console.log(findReset.length)
-  // if too many requests in window, throw err
 
   var newResetAttempt = new resetAttempt({
     dateAttempted: Date.now(),
@@ -102,7 +100,7 @@ router.post('/reset-password-request', catchErrors(async(req, res) => {
       throw { message: "Reset request error. Contact support."}
     }
   } else {
-    throw "Failed to save resetAttempt to database."
+    throw  { message:"Failed to save resetAttempt to database." }
   }
 }))
 
@@ -116,9 +114,6 @@ router.post('/reset-password', catchErrors(async(req, res) => {
   if(findRequestAttempt === null){
     throw { message: "Failed to find a proper reset attempt.  If you have already used this link to change a password, you need to generate a new one with the Forgot Password form.  Please contact support."}
   }
-  // if(!findRequestAttempt){
-  //   throw { message: "Fail to find a proper reset attempt.  Please contact support."}
-  // }
   if(findRequestAttempt && (findRequestAttempt.expirationDate < Date.now())){
     throw { message: "Your email link has expired.  Please initiate a new password reset request." }
   }

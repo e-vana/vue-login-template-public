@@ -12,7 +12,6 @@ const path = require('path')
 require('dotenv').config();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-// app.use(checkToken);
 
 // @@ Router Route locations
 app.use('/api/users', require('./routes/users'));
@@ -29,7 +28,7 @@ app.use(function(req, res, next) {
 });
 
 
-//here we are configuring dist to serve app files
+//Serves front end distribution files on build
 app.use('/', serveStatic(path.join(__dirname, '../client/dist')))
 
 // this * route is to serve project on different page routes except root `/`
@@ -37,7 +36,7 @@ app.get(/.*/, function (req, res) {
 	res.sendFile(path.join(__dirname, '../client/dist/index.html'))
 })
 
-// @@ Setup Server
+//Setup Server
 mongoose.connect(process.env.DB_URL, { useNewUrlParser: true }).then(
   () => {
     console.log("Database connected...")
