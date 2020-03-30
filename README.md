@@ -2,6 +2,8 @@
 
 This application is a login and registration template that utilizes VueJS and ExpressJS.  There's some built in administrative functionality that will at some point be developed further to have some more tools.  This application allows users to create an account, get email confirmations of account creation, allows users to login and allows users to reset their passwords.
 
+![Imgur](https://i.imgur.com/9bqrmV9.png)
+
 ## See a live example of the application
 
 [Check out a deployed version of this application here](https://vue-login-template.herokuapp.com/)
