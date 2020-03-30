@@ -1,0 +1,22 @@
+html {
+  --primary-color: #e20a75;
+  --dark-bg: #e4e4e4;
+}
+.ar {
+  text-align: right;
+}
+
+.my-bg-dark {
+  background: var(--dark-bg);
+}
+
+.form-card {
+  background-color: white;
+  border-radius: 5px;
+  background-image: url('../assets/moon-bg.png');
+  background-size: cover;
+}
+input {
+  width: 100%;
+  box-sizing: border-box;
+}
