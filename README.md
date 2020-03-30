@@ -91,5 +91,8 @@ Be sure to change your deployment variables within Heroku!
 * [Express](https://expressjs.com/) - Server framework
 * [MongoDB](https://www.mongodb.com/) - Database
 * [Mongoose](https://mongoosejs.com/) - Backend Object Modeling
+* [Bootstrap-Vue](https://bootstrap-vue.js.org/) - Front end styling framework
+* [Postman](https://www.postman.com/) - API Testing
+
 
 
