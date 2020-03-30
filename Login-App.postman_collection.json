@@ -1,0 +1,273 @@
+{
+	"info": {
+		"_postman_id": "662c6a72-0db3-4d4c-91d2-03b7c6d71fc9",
+		"name": "Login-App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:3000/api/account/reset-password-request",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"email\": \"test@test.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/account/reset-password-request",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"account",
+						"reset-password-request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/account/reset-password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"resetAttemptId\": \"5d434b82b918080118f1d46a\",\n\t\"newPassword\": \"test2\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/account/reset-password",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"account",
+						"reset-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/account/change-email",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"\",\n\t\"password\": \"\",\n\t\"newEmail\":\"\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/account/change-email",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"account",
+						"change-email"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/account/change-password",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"\",\n\t\"password\": \"\",\n\t\"newPassword\":\"\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/account/change-password",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"account",
+						"change-password"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/users/register",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\": \"user\",\n\t\"password\": \"password\",\n\t\"email\":\"user@test.com\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/users/register",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/users/login",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJlbWFpbCI6InVzZXJAdGVzdC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTY1MDE4NzYwLCJleHAiOjE1NjUwMjIzNjB9.k-QvB0ngdx0yHSDi9aB5f5cihgC8i61e8ypj-rEYNRw\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/users/signout",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/users/signout",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJlbWFpbCI6InVzZXJAdGVzdC5jb20iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNTY1MDE4NzYwLCJleHAiOjE1NjUwMjIzNjB9.k-QvB0ngdx0yHSDi9aB5f5cihgC8i61e8ypj-rEYNRw\"\n}"
+				},
+				"url": {
+					"raw": "localhost:3000/api/users/signout",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"signout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/users/all",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3Q5IiwiZW1haWwiOiJ0ZXN0OUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NjUwMzEyMTQsImV4cCI6MTU2NTAzNDgxNH0.Aq92rcpId_LFlYZ_xVtN-Bg1OHEVBBW_LqKK6YGxZrE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/users/all",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"users",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:3000/api/support/all-tickets",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InRlc3Q5IiwiZW1haWwiOiJ0ZXN0OUB0ZXN0LmNvbSIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE1NjUwMzEyMTQsImV4cCI6MTU2NTAzNDgxNH0.Aq92rcpId_LFlYZ_xVtN-Bg1OHEVBBW_LqKK6YGxZrE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/api/support/all-tickets",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"support",
+						"all-tickets"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
