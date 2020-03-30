@@ -1,3 +1,4 @@
+// primitive password checking for the client side
 function checkPassword(password){
   if (password.length < 8){
     return false;

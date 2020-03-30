@@ -22,8 +22,8 @@ Vue.use(BootstrapVue, ToastPlugin, cookies);
 
 require('dotenv').config();
 Vue.config.productionTip = false;
-// console.log($cookies.get("user_token"));
 
+//On application start, check for existing token and adjust state properly
 if($cookies.get("user_token")){
   var decoded = jwtDecode($cookies.get("user_token"));
   if(decoded.isAdmin){

@@ -22,11 +22,9 @@
         <b-icon id="menu-btn-icon" class="h1" icon="grid-fill"></b-icon>
       </div>
     </div>
-    <!-- <b-btn @click="toggleMenuDropDown"></b-btn> -->
-
-    <!-- Drop down menu div -->
   </div>
 
+  <!-- Drop down menu div -->
   <transition name="fade" mode="out-in">
     <div v-if="showDropDown && (this.windowWidth < this.menuCollapseWidth)" id="dropdown-menu" class="menu-dropdown" >
       <router-link to="/"><h5>Home</h5></router-link>

@@ -63,9 +63,6 @@ export default new Router({
         try{
           var params = to.params.id;
           var confirmedEmail = await http().get(`${process.env.VUE_APP_API_URL}/api/users/confirmed-email/${params}`);
-
-          // console.log(confirmedEmail.data.isConfirmed)
-
           if(confirmedEmail.data.isConfirmed==true){
             next('/');
           }else {
