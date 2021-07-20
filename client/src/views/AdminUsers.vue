@@ -71,6 +71,7 @@ export default {
   created: async function(){
     try {
       var allUsers = await httpAuth().get(`${process.env.VUE_APP_API_URL}/api/users/all`);
+      console.log(allUsers)
       this.dataArray = allUsers.data;
       // console.log(allUsers.data);
 

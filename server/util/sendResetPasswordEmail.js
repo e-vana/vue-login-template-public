@@ -1,36 +1,44 @@
-const nodemailer = require('nodemailer');
+require('dotenv').config();
+const mailjet = require ('node-mailjet').connect(`${process.env.MAILJET_KEY1}`, `${process.env.MAILJET_KEY2}`);
 
 
-async function sendResetPasswordEmail(to, resetAttemptId){
+const sendResetPasswordEmail = async function (to, resetAttemptId){
   try {
-    var id = resetAttemptId;
 
-    let transporter = nodemailer.createTransport({
-      service: 'Hotmail',
-      auth: {
-          user: `${process.env.EMAIL_USER}`,
-          pass: `${process.env.EMAIL_PW}`
+    let htmlString = `<h2>Hey, ${process.env.APP_NAME} user!</h2><p>Someone requested a password change on your account.  If this was not you, please ignore this email.</p><a href="${process.env.APP_URL}/password-reset/${resetAttemptId}">Click here to reset your password</a>`
+
+    let requestObject = {"Messages":[
+      {
+        "From": {
+          "Email": `${process.env.EMAIL}`,
+          "Name": `${process.env.FIRST_NAME}`
+        },
+        "To": [
+          {
+            "Email": `${to}`,
+            "Name": `${to}`
+          }
+        ],
+        "Subject": `Vue Authentication Password Reset`,
+        "TextPart": "",
+        "HTMLPart": `${htmlString}`,
+        "CustomID": "AppGettingStartedTest"
       }
-    });
+    ]};
 
-    var mailOptions = {
-      from: `${process.env.EMAIL_USER}`,
-      to: to,
-      subject: `${process.env.APP_NAME} Password Reset Request`,
-      html: `<h2>Hey, ${process.env.APP_NAME} user!</h2><p>Someone requested a password change on your account.  If this was not you, please ignore this email.</p><a href="${process.env.APP_URL}/password-reset/${id}">Click here to reset your password</a>`
-    };
-    var mailOutput = await transporter.sendMail(mailOptions);
-    console.log(mailOutput)
-    if(mailOutput){
+    let request = await mailjet.post("send", {'version': 'v3.1'}).request(requestObject);
+    if(request){
+      console.log(`Succesfully sent a reset password email to ${to}`)
       return true;
-    } else {
+    }else {
       return false;
     }
-  } catch(err){
-    console.log(err);
-    return false;
+  } catch (error) {
+    console.log(error)
   }
-
+  
 }
 
 module.exports = sendResetPasswordEmail;
+
+

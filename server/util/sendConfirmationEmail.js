@@ -1,37 +1,44 @@
-const nodemailer = require('nodemailer');
 require('dotenv').config();
+const mailjet = require ('node-mailjet').connect(`${process.env.MAILJET_KEY1}`, `${process.env.MAILJET_KEY2}`);
 
 
-
-async function sendConfirmationEmail(to, userId){
+const sendConfirmationEmail = async function (to, userId){
   try {
 
-    let transporter = nodemailer.createTransport({
-      service: 'Hotmail',
-      auth: {
-          user: `${process.env.EMAIL_USER}`,
-          pass: `${process.env.EMAIL_PW}`
-      }
-  });
+    let htmlString = `<h2>Thank you for signing up for ${process.env.APP_NAME}!</h2><p>Please click the link below to confirm your account creation.</p><a href="${process.env.APP_URL}/confirm-email/${userId}">Click here to finish account registration.</a>`
 
-    var mailOptions = {
-      from: `${process.env.EMAIL_USER}`,
-      to: to,
-      subject: `${process.env.APP_NAME} New User Confirmation `,
-      html: `<h2>Thank you for signing up for ${process.env.APP_NAME}!</h2><p>Please click the link below to confirm your account creation.</p><a href="${process.env.APP_URL}/confirm-email/${userId}">Click here to finish account registration.</a>`
-    };
-    var mailOutput = await transporter.sendMail(mailOptions);
-    console.log(mailOutput)
-    if(mailOutput){
+    let requestObject = {"Messages":[
+      {
+        "From": {
+          "Email": `${process.env.EMAIL}`,
+          "Name": `${process.env.FIRST_NAME}`
+        },
+        "To": [
+          {
+            "Email": `${to}`,
+            "Name": `${to}`
+          }
+        ],
+        "Subject": `Vue Authentication Email Confirmation`,
+        "TextPart": "",
+        "HTMLPart": `${htmlString}`,
+        "CustomID": "AppGettingStartedTest"
+      }
+    ]};
+
+    let request = await mailjet.post("send", {'version': 'v3.1'}).request(requestObject);
+    if(request){
+      console.log(`Succesfully sent a confirmation email to ${to}`)
       return true;
-    } else {
+    }else {
       return false;
     }
-  } catch(err){
-    console.log(err);
-    return false;
+  } catch (error) {
+    console.log(error)
   }
-
+  
 }
 
 module.exports = sendConfirmationEmail;
+
+

@@ -36,7 +36,6 @@ html {
 }
 #app {
   font-family: 'Oxygen', sans-serif;
-  // font-family: 'Beth Ellen', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;

@@ -104,13 +104,13 @@ export default {
         var userId = login.data.userId;
         this.userId = login.data.userId;
         this.userEmail = login.data.userEmail;
-        var isConfirmed = await http().get(`${process.env.VUE_APP_API_URL}/api/users/confirmed-email/${userId}`);
+        // var isConfirmed = await http().get(`${process.env.VUE_APP_API_URL}/api/users/confirmed-email/${userId}`);
 
-        if(!isConfirmed.data.isConfirmed){
-          this.isNotConfirmed = true;
-          this.userEmail = login.data.userEmail;
-          throw `You cannot continue to login until your email address is confirmed.  Please check your email or click the button below to resend a confirmation email.`
-        }
+        // if(!isConfirmed.data.isConfirmed){
+        //   this.isNotConfirmed = true;
+        //   this.userEmail = login.data.userEmail;
+        //   throw `You cannot continue to login until your email address is confirmed.  Please check your email or click the button below to resend a confirmation email.`
+        // }
 
         if(login.data.error){
           throw login.data.error;

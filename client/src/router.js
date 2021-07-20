@@ -11,8 +11,6 @@ import Dashboard from './views/Dashboard.vue'
 import Admin from './views/Admin.vue'
 import AdminUsers from './views/AdminUsers.vue'
 import AdminUser from './views/AdminUser.vue'
-
-import Splash from './views/Splash.vue'
 import Breakdown from './views/Breakdown.vue'
 import { http } from './util/axiosHttp.js'
 
@@ -29,11 +27,6 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
-    },
-    {
-      path: '/splash',
-      name: 'splash',
-      component: Splash
     },
     {
       path: '/login',
